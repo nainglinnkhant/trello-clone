@@ -1,0 +1,22 @@
+.form {
+     min-width: 300px;
+     padding: 0.5rem;
+     background: rgba(229, 231, 235);
+     margin: 1rem;
+     border-radius: 5px;
+}
+
+.input {
+     border: none;
+     outline: none;
+     width: 85%;
+}
+
+.button {
+     width: 15%;
+     border: none;
+     outline: none;
+     color: #ffffff;
+     font-weight: bold;
+     background: #7addeb;
+}
