@@ -18,15 +18,15 @@ const TaskItem = ({ task, taskIndex, columnIndex }) => {
      }
 
      return (
-          <div 
-               className="bg-white py-2 my-1 px-2 rounded text-dark fw-bold shadow-sm"
-          >
-               <AppDrop drop={dropHandler}>
-                    <AppDrag transferData={{ type: 'task', taskIndex, columnIndex }}>
+          <AppDrop drop={dropHandler}>
+               <AppDrag transferData={{ type: 'task', taskIndex, columnIndex }}>
+                    <div 
+                         className="bg-white py-2 my-1 px-2 rounded text-dark fw-bold shadow-sm"
+                    >
                          {task.name}
-                    </AppDrag>
-               </AppDrop>
-          </div>
+                    </div>
+               </AppDrag>
+          </AppDrop>
      )
 }
 
