@@ -1,7 +1,6 @@
 const AppDrop = ({ children, drop }) => {
      const dropHandler = (e) => {
           e.stopPropagation()
-          e.preventDefault()
           e.dataTransfer.effectAllowed = 'move'
           e.dataTransfer.dropEffect = 'move'
 

@@ -38,15 +38,12 @@ export const BoardProvider = ({ children }) => {
           const toTaskIndexFallback = toTaskIndex !== null ? toTaskIndex : columns[toColumnIndex].tasks.length
 
           setColumns(prevColumns => {
-               const newColumns = [...prevColumns]
+               const newColumns = JSON.parse(JSON.stringify(prevColumns))
+
                const taskToMove = newColumns[fromColumnIndex].tasks.splice(fromTaskIndex, 1)[0]
                newColumns[toColumnIndex].tasks.splice(toTaskIndexFallback, 0, taskToMove)
 
-               return newColumns.map(column => {
-                    const newTasks = column.tasks.filter(task => task !== undefined)
-                    column.tasks = newTasks
-                    return column
-               })
+               return newColumns
           })
      }
 

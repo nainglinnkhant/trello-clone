@@ -1,6 +1,6 @@
-import { useBoard } from "../context/BoardContext"
-import AppDrag from "./drag-and-drop-api/AppDrag"
-import AppDrop from "./drag-and-drop-api/AppDrop"
+import { useBoard } from '../context/BoardContext'
+import AppDrag from './drag-and-drop-api/AppDrag'
+import AppDrop from './drag-and-drop-api/AppDrop'
 
 const TaskItem = ({ task, taskIndex, columnIndex }) => {
      const { moveTask, moveColumn } = useBoard()
