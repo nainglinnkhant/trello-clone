@@ -10,6 +10,7 @@ const NewColumnForm = () => {
           e.preventDefault()
 
           addColumn(columnName)
+          setColumnName('')
      }
 
      return (

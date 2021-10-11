@@ -7,7 +7,9 @@ const BoardContext = React.createContext({
      addTask: (changedColumn, task) => {},
      addColumn: (columnName) => {},
      moveTask: (fromTaskIndex, toTaskIndex, fromColumnIndex, toColumnIndex) => {},
-     moveColumn: (fromColumnIndex, toColumnIndex) => {}
+     moveColumn: (fromColumnIndex, toColumnIndex) => {},
+     deleteTask: (taskIndex, columnIndex) => {},
+     deleteColumn: (columnIndex) => {}
 })
 
 export const useBoard = () => useContext(BoardContext)
@@ -15,7 +17,7 @@ export const useBoard = () => useContext(BoardContext)
 export const BoardProvider = ({ children }) => {
      const [columns, setColumns] = useLocalStorage('board', DEFAULT_BOARD)
 
-     const addTaskHandler = (changedColumn, task) => {
+     const addTask = (changedColumn, task) => {
           setColumns(prevColumns => {
                const columnTasks = changedColumn.tasks.concat({ description: '', name: task, id: uuid() })
 
@@ -28,13 +30,13 @@ export const BoardProvider = ({ children }) => {
           })
      }
 
-     const addColumnHandler = (columnName) => {
+     const addColumn = (columnName) => {
           setColumns(prevColumns => {
                return prevColumns.concat({ id: uuid(), name: columnName, tasks: [] })
           })
      }
 
-     const moveTaskHandler = (fromTaskIndex, toTaskIndex, fromColumnIndex, toColumnIndex) => {
+     const moveTask = (fromTaskIndex, toTaskIndex, fromColumnIndex, toColumnIndex) => {
           const toTaskIndexFallback = toTaskIndex !== null ? toTaskIndex : columns[toColumnIndex].tasks.length
 
           setColumns(prevColumns => {
@@ -47,7 +49,7 @@ export const BoardProvider = ({ children }) => {
           })
      }
 
-     const moveColumnHandler = (fromColumnIndex, toColumnIndex) => {
+     const moveColumn = (fromColumnIndex, toColumnIndex) => {
           setColumns(prevColumns => {
                const newColumns = [...prevColumns]
                const temp = newColumns[toColumnIndex]
@@ -57,12 +59,32 @@ export const BoardProvider = ({ children }) => {
           })
      }
 
+     const deleteTask = (taskIndex, columnIndex) => {
+          setColumns(prevColumns => {
+               const newColumns = JSON.parse(JSON.stringify(prevColumns))
+
+               newColumns[columnIndex].tasks.splice(taskIndex, 1)
+               return newColumns
+          })
+     }
+
+     const deleteColumn = (columnIndex) => {
+          setColumns(prevColumns => {
+               const newColumns = [...prevColumns]
+
+               newColumns.splice(columnIndex, 1)
+               return newColumns
+          })
+     }
+
      const contextValue = {
-          columns: columns,
-          addTask: addTaskHandler,
-          addColumn: addColumnHandler,
-          moveTask: moveTaskHandler,
-          moveColumn: moveColumnHandler
+          columns,
+          addTask,
+          addColumn,
+          moveTask,
+          moveColumn,
+          deleteTask,
+          deleteColumn
      }
 
      return (

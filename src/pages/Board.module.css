@@ -1,0 +1,12 @@
+.delete-zone {
+     background: #e9d6d6;
+     border: 1px solid #ff2b2b;
+     width: 300px;
+     height: 10rem;
+     margin: 2rem 1rem;
+     border-radius: 5px;
+     color: #ff2b2b;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
